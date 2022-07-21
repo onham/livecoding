@@ -1,0 +1,352 @@
+setcps (0.5625)
+
+d5  
+    $ every 8 (rev)
+    $ speed "1 4 [8 9] [4 2 4]"
+    # n "2 2 2 [2 2]"
+    # s "SOPHIE_fx"
+    # accelerate (slow 4 $ (sine -0.5) * 8)
+    # gain 1.05
+
+d2 $ squiz "2 [[6 4] 3] [6*2 2] 4*4" # n "8 [4 4] [8 4]" # s "bubble"
+
+d2 $ n "1*4" # s "bd"
+
+d2 $ sound "[bd sd, arpy arpy:4 arpy:5]"
+
+d2 $ sound "[bd sd] [mt ht lt] [arpy arpy:4] [sn sn:2 bd*2]"
+
+d1 $ sound "bd sd . mt ht lt . arpy arpy:4 . sn sn:2 bd*2"
+
+d1 $ s "sn(5,16)"
+    # gain 0.8
+
+d7 $ s "ho:1*4"
+    # gain 0.65
+
+setcps(0.5625)
+
+d1 
+    $ striate "16"
+    $ s "SOPHIE_textures:5" 
+    # speed 0.75
+    # begin 0.2
+    # end 0.7
+    # legato 1
+
+hush
+
+d3 $ n "~ 1*2" # s "hh27"
+    -- # silence
+
+d4  
+    $ every 8 (rev)
+    $ splice 8 "0 [1 2] 3*2 [4 5]"
+    $ s "sd:3" 
+    # legato 1
+    # gain 1
+
+d3 
+    $ repeatCycles 16
+    $ n "4 [3 3] 2 1*4"
+    # s "SOPHIE_snares:2" # speed (rand - 2)
+
+d4
+    $ n (scale "major" $ struct "t(7,12)" $ irand 24)
+    # crush "4 [4 3]"
+    # s "superpiano"
+    # silence
+
+d2 
+    $ note "c5*3 [a5*2 [g5 e5*2]]"
+    # pan rand
+    # s "SOPHIE_snares:4"
+    |+ note "<2 4>"
+
+d1 
+    $ degradeBy 0.4
+    $ s "SOPHIE_wet_kicks:6*4"
+
+d1
+    $ qtrigger 1
+    $ jux ((|- n "12") . rev)
+    $ struct "t(3,8,<2,5>)"
+    $ note "<a'maj b'min e'min !>"
+    # s "quan2"
+    # room 0.3
+    # sz 0.4
+    # legato 1
+    # pF "clamp" 0.35
+    # pF "res" 0.35
+    # gain 0.7
+
+d5
+    $ n "1*8" 
+    # s "SOPHIE_subs"
+    # gain 1.2
+    # legato 1
+
+d1 
+    $ off "0.125" (|+ n "<7 12 -5>")
+    -- $ every 8 (rev)
+    $ every 16 (|+| n (run 16))
+    -- $ every 5 (rev . chunk 8 (slow 2) . scramble 4 . brak)
+    -- $ scramble 4
+    -- $ randslice 4
+    $ n (slow 2 $ scale "minor" $ "[1*4 [5*8 4*4]] 3*8")
+    |+ n (scale "minor" $ "<-2 -4 -3 1>*2")
+    |+ n (scale "minor" $ "<[2 -5] [3 -1]>*2")
+    |+ n (scale "minor" $ "<[-4 4 1 -5] [4 -3 2 7]>")
+    # s "donk"
+    # legato 1
+    # room 0.6
+    # sz 0.8
+    -- # pF "clamp" 0.35
+    -- # pF "res" 0.35
+    # gain 1.0
+
+hush
+
+d2 
+    -- $ juxBy 0.2 (rev)
+    $ off "0.5" (|+ n "<7 12 -5>")
+    $ whenmod 12 8 (palindrome)
+    $ every 16 (striate "[8 2 4]*4")
+    $ every 8 (rev . chunk 2 (# speed 0.5))
+    $ foldEvery [4] ((|-| n ((run 2))))
+    -- $ slow "<1 2 0.5> <2 1 4> [<5 2 1> <2 3 4>]*2"
+    $ seqPLoop [
+        (0, 2.5, 
+        off "0.25" (|+ n "<2 6 4>")
+        $ randslice 2
+        $ n "{5*2 2(3,8), 0 <3 6>, 4 [11 8]}"
+        # s "SOPHIE_snares"
+        # gain 0.9
+        )
+        ,
+        (0, 2,
+        n "{[3 1]*2 4, 0*2}"
+        # s "SOPHIE_dry_kicks"
+        # squiz 2
+        )
+    ]
+
+hush
+
+hush
+
+bpm 130
+
+d1 
+    $ striate "128"
+    $ s "SOPHIE_textures:5" 
+    # speed 0.5
+    -- # crush 4
+    # begin 0.1
+    # end 0.7
+    # legato 1
+
+d2 
+    -- $ off "0.25" (# crush 5)
+    -- $ every 16 (rev . chop 32)
+    -- $ every 4 (chunk 2 (almostAlways (# speed (choose [2,0.5]))))
+    $ n "{0 <4 15>, 5*2 <1 3>, <[6 3 7] [7 3 6]>}"
+    # s "SOPHIE_wet_kicks"
+    # legato 1
+    # orbit 1
+
+d1
+    $ off "0.125" (|- n "7")
+    $ struct "t(<7 11>,16)"
+    $ segment 16
+    $ n (scale "indian"
+        $ floor <$> (slow 2 $ (slow 2 sine + slow 3 cosine) * "<4 6 8>")
+    )
+    # sound "quan2"
+    # cc "1:1"
+
+
+d3 
+    $ ur 8 "{<wkicks wkicks:squeeze>, fx subs, donk ~, clap, ~ <guti jdwi>}"
+    [
+        (
+            "wkicks", 
+                every 8 (rev . chop 32)
+                $ n "<4(5,8) 4(3,8)> <3 [6 2*4]>"    
+                # s "SOPHIE_wet_kicks" 
+                # gain 0.95
+        ),
+        (
+            "fx",
+                every 4 (striate "8")
+                $ n "<2>"
+                # s "SOPHIE_fx"
+                # pan rand
+                # gain 1.1
+        ),
+        (
+            "subs",
+                every 8 (rev)    
+                $ n "3 <8*2 6>"
+                # s "SOPHIE_subs"
+                # legato 1
+                # gain 1
+        ),
+        (
+            "clap",
+                every 4 (rev)
+                $ splice 4 "0 <[1 2] 3> <3*2 1*4> [4 5]"
+                $ s "SOPHIE_claps:0"
+                # legato 1
+                # gain 0.9
+        ),
+        (
+            "donk",
+                -- (~>) (choose [0, 0.5, 0.25])
+                struct "t(11,16,<3,6>)"
+                $ note "<c5'm6 [g4'm6 a4'm6]>"
+                # s "donk"
+                # legato 4
+                # gain 0.7
+        ),
+        (
+            "guti",
+                every "1 3 5" (off "0.5" (|+ n "1"))
+                $ every "8" (|+| accelerate "0.5 [0.5 -0.25]")
+                $ s "get_used_to_it"
+                # speed 1
+                # up (offadd (2/8) 2 $ offadd (3/8) 5 $ "[[0 -3 -5 -7 -9](9,16)]")
+                # hcutoff "[2000 1000 500]/4"
+                # room 0.3
+                # sz 0.3
+                # pan rand
+                # orbit 2
+                # gain 1.2
+        ),
+        (
+            "jdwi",
+                every "1 3 5" (off "0.5" (|- n "1"))
+                $ every "8" (|+| accelerate "0.5 [0.5 -0.25]")
+                $ s "get_used_to_it:1"
+                # speed 1
+                # up (offadd (2/8) 2 $ offadd (3/8) 5 $ "[[0 -3 -5 -7 -9](9,16)]")
+                # hcutoff "[2000 1000 500]/4"
+                # room 0.3
+                # sz 0.3
+                # pan rand
+                # orbit 3
+                # gain 1.2
+        )
+    ]
+    [
+        (
+            "squeeze",
+        (# crush 6
+        )
+        )
+    ]
+
+hush
+
+bpm 120
+
+d2 $ s "SOPHIE_subs:3 <SOPHIE_subs:8*2 SOPHIE_subs:6>"
+    # legato 1
+
+
+let     
+    km1 = "korgm1"
+    ld = "linndrum"
+    csk1 = "casiosk1"
+    rp = "rhodespolaris"
+    sm = "sergemodular"
+in
+d1 
+    $ ur 4 "{dkicks, bells, mt}"
+    [
+        (
+            "mt",
+                every 4 (rev)
+                $ squiz "5*4 [3 1] 4*4 <[3 8] 2*4>"
+                # s "flutter"
+                # legato 1
+                # gain 1
+                # orbit 0
+        ),
+        (
+            "dkicks",
+                speed (struct "t(<5 7>,<11 16>)" $ range 1.25 1.75 sine)
+                # note "c3"
+                # s "SOPHIE_dry_kicks:1"
+                # orbit 0
+        ),
+        (
+            "bells",
+                jux (rev)
+                $ off "<0.5>" (struct "t(9,16,2)")
+                $ struct "t(5,8,2)"
+                $ note (scale "ritusen" $ "<a6 b6 e6 !>")
+                # s "donk"
+                # speed (struct "t(9,16)" $ range 0.5 0.25 sine)
+                # room 0.6
+                # sz 0.9
+                # legato 2
+                # gain 0.9
+                # orbit 1
+        ),
+        (
+            "clap",
+                struct (every 3 inv "t f t*2 f") 
+                $ sound "cp"
+        )
+    ]
+    []
+
+hush
+
+d3
+    $ jux (rev)
+    $ off "<0.5>" (struct "t(9,16,2)")
+    $ struct "t(5,8,2)"
+    $ note (scale "ritusen" $ "<a6'mS6 b6'mS6 e6'mS6 !>")
+    # s "donk"
+    # speed (struct "t(9,16)" $ range 0.5 0.25 sine)
+    # room 0.6
+    # sz 0.9
+    # legato 2
+    # gain 0.7
+
+d1 $ struct (every 3 inv "t f t*2 f") $ sound "cp"
+
+
+
+d2 
+    $ n "0"
+    # s "get_used_to_it"
+
+setcps(0.5625)
+
+hush
+
+
+
+let     
+    rcr = "rolandcompurhythm8000"
+in
+    d1
+        -- $ every 4 (rev . chop 4)
+        $ note "c5'min7(6,8,<3 4>) <a4'min7(<3 5>,8) b4'min7(3,8)>"
+        # drumFrom rcr "ht:1"
+        # speed 1
+        -- # room 0.1
+        -- # sz 0.3
+        # legato 1.6
+        # orbit 1
+        # gain 1
+
+d2
+    $ note "1 3 4 3*4"
+    # s 
+
+
+hush

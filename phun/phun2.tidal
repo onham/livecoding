@@ -1,0 +1,78 @@
+setcps (9/16)
+
+hush
+
+d1 
+    $ off "0.125" (|+ n "c5")
+    $ striate 2
+    $ splice 16 "<[8*2] 4>"
+    $ note (slow 2 $ scale "ritusen" $ "<[e4 f4] c4>")
+    # s "<quan2>"
+    # legato 0.6
+    # room 0.6
+    # sz 0.8
+    # pF "clamp" "<0.15 0.25 0.15 0.25>"
+    # pF "res" "<0.55 0.35>"
+    # gain 0.7
+
+d5
+    -- $ every 8 (|+| note "c4")
+    $ note "e4"
+    # s "SOPHIE_textures:13"
+    # speed "<0.5>"
+    # begin "<0.7 0.5 0.7 0.5 0.4>"
+    # legato 1
+
+d6 silence
+
+let 
+    emud = "emudrumulator"
+in
+d6 
+    -- $ fast 2
+    $ fast "<1 0 2 0>"
+    $ squiz "8(5,8)"
+    # drumFrom emud "rim"
+    # gain 0.9
+
+let 
+    emud = "emudrumulator"
+in
+d7
+    $ fast "<0 2 0 1>"
+    $ squiz "8 ~ ~ 8"
+    # drumFrom emud "rim"
+    # legato 2
+    # gain 0.9
+
+d7 silence
+
+d3 
+    $ n "~ 5 [5 5] <16 ~>"
+    # s "SOPHIE_dry_kicks"
+
+d3 
+    $ n "~ 5 [5 5] <0 ~>"
+    # s "SOPHIE_subs"
+
+let 
+    doep = "doepferms404"
+in
+d4
+    -- $ note "<7 ~> <[7*2] ~> ~ <[7*2] 7 ~ ~> <~ ~ ~ 7*4>"
+    $ note "<7 ~> [7*2] ~ [7*2]"
+    # drumFrom doep "lt"
+    -- # crush "<9>"
+    # legato 2
+    -- # cps (12/16)
+    # gain 1.1
+
+d7 
+    $ n "<~ 1>"
+    # s "dorkbot"
+    # accelerate (slow 4 $ (sine -0.5) * 4)    
+    # legato 1
+
+d7 silence
+
+hush

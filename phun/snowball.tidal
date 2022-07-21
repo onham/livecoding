@@ -1,0 +1,45 @@
+bpm 140
+
+let
+    snowball' depth combinationFunction f pattern = cat $ take depth $ scanl combinationFunction pattern $ drop 1 $ iterate f pattern
+    rollSlow howOften p = sometimesBy howOften (stutWith 2 (0.125*3) id) $ p
+    rollFast howOften p = sometimesBy howOften (stutWith 2 (0.0625*3/2) id) $ p
+
+
+hush
+
+d1
+    $ snowball' 4 (overlay) (hurry 2)
+    $ s "[lt] [~ mt ht]"
+
+d1 
+    $ note 
+        (scale "hexPhrygian" 
+        $ snowball 4 (+) (slow 2)
+        $ "0 . 2 3 ~ . 0 1 . -1 -2") 
+    # s "gtr"
+
+-- snowball groove
+
+do 
+{
+    resetCycles;
+
+let 
+    al16 = "alesissr16"
+in
+d1
+    $ ghost
+    $ every 16 (rev.(# speed "-1"))
+    $ while (robo) (off 0.125 (|> s "ab:10"))
+    $ whenmod 16 4 (while "f f f t" (0.125 <~))
+    -- $ whenmod 16 8 (while "t f f f" (0.125 ~>))
+    -- $ snowball' 2 (overlay) (hurry "<2>")
+    -- $ stitch "<t>(<3 5 6>, <8>, <<0 2> <3 4>>)" (s "SOPHIE_dry_kicks:14") (s "SOPHIE_hihats:4")
+    $ sew "<t>(<5 7>, <16>, <0 3 4>)" (s "{SOPHIE_dry_kicks:2*4 ~, . SOPHIE_snares:0*8}") (s "SOPHIE_hihats:4*8")
+    # nudge (fast 8 "0 0.01")
+    # gain 1.0
+
+}
+
+bpm 140

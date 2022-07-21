@@ -1,0 +1,34 @@
+d1 
+    $ ur 4 "{dkicks, mt, bells}"
+    [
+        ("mt",
+            every 4 (rev)
+            $ squiz "5*4 [3 1] 4*4 <[3 8] 2*4>"
+            # s "flutter"
+            # legato 1
+            # gain 0.9
+            # orbit 0
+        ),
+        ("dkicks",
+            speed (struct "t(<5 7>,<11 16>)" $ range 1.25 1.75 sine)
+            # note "c4"
+            # s "SOPHIE_dry_kicks:1"
+            # orbit 0
+        ),
+        ("bells",
+            jux (rev)
+            $ off "<0.5>" (struct "t(9,16,2)")
+            $ struct "t(5,8,2)"
+            $ note (scale "ritusen" $ "<a6 b6 e6 !>")
+            # s "donk"
+            # speed (struct "t(9,16)" $ range 0.5 0.25 sine)
+            # room 0.6
+            # sz 0.9
+            # legato 2
+            # gain 0.8
+            # orbit 1
+        )
+    ]
+    []
+
+hush

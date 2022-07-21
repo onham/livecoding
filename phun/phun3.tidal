@@ -1,0 +1,300 @@
+let
+    bpm a = setcps(a/60/4)
+
+d1 
+    $ off "0.125" (|+ n "<-7 -12 -5>")
+    $ n (slow 1.5 $ scale "ritusen" $ "{1 2, <4*4> [<8*2 2*2> ~ <10 5>], <~> ~ [-3 -4]}")
+    # s "ultrasaw"
+    # legato 0.6
+    # room 0.3
+    # sz 0.5
+    -- # pF "speed" 1.5
+    -- # pF "accelerate" 1
+    # gain 0.8
+    # cps (9/16)
+
+hush
+
+bpm 128
+
+d1
+    -- $ every 8 (rev . slice 4 "2 4")
+    $ note (slow 1 $ "{-1!2 <-2 ~> <~ -4>, <~ -26> <[-24 -22] <~  ~ -22 ~>>}")
+    # s "sfm"
+    # legato 5
+    # pF "matt" 0.1
+    # pF "unison" 0.5
+    # pF "detune" 0.1
+    # cps (12/16)
+
+d1 silence
+
+hush
+
+setcps (12/16)
+
+-- quanny ethereal banger
+
+bpm 140
+
+d5 silence
+
+d5
+    -- $ every 8 (|+| note "c4")
+    $ note (slow 1 $ "c5")
+    # s "SOPHIE_textures:13"
+    # speed "<0.5>"
+    # begin "<0.7 <0.5 <0.7 0.1>>>"
+    # legato 2
+    -- # cps (9/16)
+
+let 
+    doep = "doepferms404"
+in
+d4
+    -- $ note "<7 ~> <[7*2] ~> ~ <[7*2] 7 ~ ~> <~ ~ ~ 7*4>"
+    $ note "<7 ~> [7*2] ~ [7*2]"
+    # drumFrom doep "lt"
+    -- # crush "<9>"
+    # legato 2
+    -- # cps (12/16)
+    # gain 1.1
+
+let 
+    al16 = "alesissr16"
+in
+d6
+    $ ghost
+    $ note "7(<3>,8)"
+    # drumFrom al16 "sd:9"
+
+let 
+    doep = "doepferms404"
+in
+d6
+    $ note "<<~ -7> <0*2 0*4>> <~ -7*2>"
+    # drumFrom doep "sd"
+    # room 0.3
+    # sz 0.3
+    # crush 7
+    # orbit 6
+    -- # cps (12/16)
+
+hush
+
+let 
+    al16 = "alesissr16"
+in
+d3
+    $ note (scale "hirajoshi" $ "-4 3 ~ <~ ~ ~ [3 4 3]>")
+    # drumFrom al16 "hh:1"
+    # legato 1
+
+setcps(12/16)
+
+d3 silence
+d4 silence
+d5 silence
+
+hush
+
+do {
+    resetCycles;
+d6
+    $ qtrigger 0
+    -- $ note "b2 e3 gs2 gs2 a2 gs2"
+    $ note (slow 5 $ "as2 ds3 g2 gs2 <~ c3>")
+    -- # speed 0.25
+    # s "superpiano"
+    -- # cps 0.5625
+}
+
+d5
+    $ note (slow 15 $ "as2 ds3 g2 gs2 <~ c3>")
+    # s "SOPHIE_textures:13"
+    -- # speed "<0.5>"
+    # begin "<0.5>"
+    # legato 1
+
+
+do {
+    resetCycles;
+d6
+    -- $ note (slow 10 $ "as2 ds3 g2 gs2")
+    $ note (slow 10 $ "d3 fs3 e3 g2")
+    # s "ultrasaw"
+    # legato 1
+    # room 0.3
+    # sz 0.5
+    # cps (12/16)
+}
+
+let
+    al16 = "alesissr16"
+in 
+d6
+    $ note (slow 5 $ "as2 ds3 g2 ds3 gs2 g2")
+    # drumFrom al16 "bd:0"
+
+-- paulchannelstrip study 1 ::
+d1
+    $ every 4 (fast 0.01) 
+    $ sometimesBy 0.5 (fast "-1 -2 0.5 0.25 0.05 0.75 0.125 -3") 
+    $ n (arp "<disconverge thumbupdown diverge>" "{a4'min7'8 c5'mS6'8}/16") # s "superpiano"
+    # room 0.8
+    # size 0.9
+    # orbit 0
+    -- # offset "0.2 0.21 0.125 0.195"
+    # offset (choose[0.1,0.22,0.5,1,0.155])
+
+hush
+
+-- farmernojo study 1 ::
+d1 
+    $ chunk "[1|2|4]" 
+    (spreadr ($) 
+    [(# speed "[1 2 1 [1 4]]"),
+    spin 2,
+    zoom (0.25,0.75).(hurry 2),
+    (# coarse "32 .. 8")]) 
+    $ every "2 3" (chunk "[2|4]" (|> s "house")) 
+    $ sew "t(<7!3 11>,16)" (s "db*16") (s "ab*16") 
+    # n (irand 10) 
+    # legato 1 
+    # shape 0.3
+    # gain 1.0
+
+hush
+
+setcps(9/16)
+
+bpm 120
+
+-- quanny cymbal groove
+d1
+    $ sew "t(<5 7!2>,<11 16>,<0 3>)" (s "db*8") (s "ab*16") 
+    # n (irand 2)
+    # legato 1
+    # speed (struct "t(16,16)" $ range 1 0.75 sine)
+    # shape 0.5
+    # nudge (fast 8 "0 0.03")
+    # gain 1.1
+
+hush
+
+-- quanny drum groove
+do {
+    resetCycles;
+let
+    al16 = "alesissr16"
+in 
+d2 
+    -- $ every 8 (rev.chop 32)
+    -- $ every 32 (rev.striate 32)
+    $ chunk "[1|2|4]" 
+    (spreadr ($) 
+    [
+        (# speed "[1 2 <1 -1> [1 4]]"),
+        spin 2,
+        zoom (0.5,0.75).(hurry "<1 2>")
+        -- (# coarse "32 .. 8")
+    ]) 
+    $ every "2" (chunk "[1|2|4]" (|> s "<SOPHIE_snaps*4>")) 
+    $ slow "<1>"
+    $ sew "t(<5 7!2>,<11 16>,<0 3>)" (s "<feel*16 sd*16 SOPHIE_claps*16>") (drumFrom al16 "bd*8")
+    # n (irand 16)
+    # nudge (fast 8 "0 0.03")
+}
+
+hush
+
+-- farmernojo study 2 ::
+d1 
+    $ every 3 (linger "0.25 0.5") 
+    $ juxBy (tri*sine) rev 
+    $ off 0.125 ((# s "latibro").(# sustain (choose[0.0625,0.125])).(# waveloss (sine*16+8))) 
+    $ hurry "2 1 [4 2] 1" 
+    $ s "{peri ~ feel bd glitch}%8" 
+    # up "<0 <4 [<0 7> 9]>>" 
+    # coarse ((irand 4)*5) 
+    # shape 0.3
+    # gain 1.0
+
+-- quanny glitch groove
+do {
+    resetCycles;
+let
+    al16 = "alesissr16"
+in 
+d2
+    $ every 16 (juxBy (tri*sine) rev)
+    $ every "4" (chunk "[1|2|4]" (|> s "<SOPHIE_snaps>")) 
+    $ off 0.125 ((# s "glitch").(# sustain (choose[1.5,1,0.5])))
+    $ sew "t(<7 9>,<9 16>,<0 3>)" (s "{peri, feel ~ [sd SOPHIE_hihats]}*4") (drumFrom al16 "bd*4")
+    # n (scale "ritusen" $ (irand 16)*4)
+    # up "<0 7 0 [-7 <0 -5>]>"
+    # nudge (fast 8 "0 0.03")
+    # lpf "1000"
+    # shape 0.1
+}
+
+hush
+      
+d1 $ stack [
+  sound "bd bd/4",
+  sound "hh(5,8)"
+  ] 
+  # nudge "[0 0.04]*4"
+
+bpm 120
+
+-- quanny piano melody
+
+d1
+    $ off "<0.25 0.125>" 
+        (|+| note "<7 5>")
+    $ note (
+        slow 1 
+        $ scale "ritusen" 
+        $ "{<0'maj7 -5'maj7> [<b4 e4> <a4 a4'min6 a4 a4'min7>], [0 3] 2}")
+    # s "superpiano"
+    # nudge (fast 8 "[0 0.03]")
+    -- # legato 2
+
+hush
+
+bpm 120
+
+let 
+    doep = "doepferms404"
+in
+d3
+    $ note "<7 ~> <[7*2] ~> ~ <[7*2] 7 ~ ~> <~ ~ ~ 7*8>"
+    -- $ note "<7 ~> [7*2] ~ [7*2]"
+    # drumFrom doep "lt"
+    -- # crush "<9>"
+    # legato 2
+    # gain 1.1
+    # orbit 0
+
+d3 silence
+
+
+
+d4 
+    $ note "c5*2 ~ <~ c5*4>"
+    # s "SOPHIE_subs:15"
+    # speed (struct"t(16,16)" $ range 0.75 1 sine)
+    # legato 3
+
+d2
+    $ ghost
+    $ n "1(3,8)"
+    # s "SOPHIE_hihats"
+    # legato 1
+    # gain 0.9
+    # shape 0.1
+
+d4 silence
+
+hush

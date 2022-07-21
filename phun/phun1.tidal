@@ -1,0 +1,144 @@
+
+d5
+    $ note "a5 [f5 e5] c5*2"
+    # s "SOPHIE_fx_kicks:2"
+
+d2
+    $ note "c5"
+    # s "SOPHIE_textures:8"
+    # begin "<0.7 0.5 0.7 0.5 0.4>"
+    # end "<0.9 1 0.95 1 0.99 1>"
+    # speed "<0.5>"
+    -- # pan rand
+    # legato 1
+
+d2
+    $ note "e5"
+    # s "SOPHIE_textures:7"
+    # begin "<0.2 0.3 0.5 0.3 0.5 0.1>"
+    -- # end "<0.75>"
+    # speed "<0.25>"
+    -- # pan rand
+    # legato 1
+
+d2
+    $ note "c5"
+    # s "SOPHIE_textures:17"
+    # speed "<0.5>"
+    # begin "<0.5>"
+    # gain 1
+    # legato 1
+
+d5
+    $ note "c5"
+    # s "SOPHIE_textures:13"
+    # speed "<0.5>"
+    # begin "<0.7 0.5 0.7 0.5 0.4>"
+    # legato 1
+
+d5 silence
+
+d3
+    -- $ every 1 (chunk 8 (striate 32))
+    $ s "breaks:0"
+    # begin "0.2"
+    # end "<1>"
+    # speed "<1.5>"
+    -- # accelerate "1"
+    # legato 1
+
+hush
+
+d4
+    $ n "~ ~ [5 5]"
+    # s "SOPHIE_subs"
+    # legato 2
+
+d3
+    $ chop "<3>"
+    -- $ chop 32
+    $ s "breaks:4 breaks:4"
+    # begin "0.2"
+    # end 1
+    # legato 1
+    # speed "<2>"
+
+d4
+    -- $ every 4 
+    $ every 4 (# speed "1.5 1 0.5")
+    $ speed (struct "t(<5 7>,<11 16>)" $ range 1 1.5 sine)
+    # n "9*4"
+    # s "SOPHIE_dry_kicks"
+
+setcps(9/16)
+
+bpm 140
+
+d4
+    $ stack [
+        chop "<3>"
+        $ s "breaks:4"
+        # begin "0.5"
+        # end 1
+        # legato 1
+        # speed "<1.5>",
+        struct "f f t*2 f"
+        $ s "SOPHIE_claps:5"
+        # gain 0.9
+    ]
+
+hush
+
+let     
+    rcr = "rolandcompurhythm8000"
+in
+    d1
+        $ every 4 (# speed "0.75 1")
+        $ note "c5'min7(3,8,2) <a4'min7(3,8) b4'min7(3,8)>"
+        # drumFrom rcr "ht:1"
+        -- # s "able"
+        # speed 1
+        -- # nudge (fast 8 "0 0.03")
+        # room 0.1
+        # sz 0.3
+        # legato 1.6
+        # orbit 1
+        # gain 0.9
+        
+
+hush
+
+d3
+    $ chop "<5>"
+    $ s "breaks:5"
+    # begin "0"
+    # end 1
+    # legato 1
+    # speed "<1.2>"
+
+hush
+
+d3
+    $ chop "<3>"
+    $ s "breaks:7"
+    # begin "0.7"
+    # end 1
+    # legato 1
+    # speed "<1.2>"
+
+d2 
+    $ n "1(7,16)"
+    # s "SOPHIE_dry_kicks"
+
+d2
+    $ n "1*4"
+    # s "SOPHIE_dry_kicks"
+
+d4
+    -- $ every 4 
+    $ every 4 (# speed "1 0.5")
+    $ speed (struct "t(<5 7>,<11 16>)" $ range 1 1.5 sine)
+    # n "9*4"
+    # s "SOPHIE_dry_kicks"
+
+d4 silence

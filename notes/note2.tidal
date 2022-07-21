@@ -1,0 +1,56 @@
+setcps (0.5625)
+
+hush
+
+do {
+    resetCycles;
+d5  
+    $ qtrigger 2
+    $ every 16 (rev)
+    $ n "2!3 [2!2]"
+    # s "SOPHIE_fx" 
+    # accelerate (slow 4 $ (sine -0.5) * 8)
+    # legato 1
+    # gain 1.0
+}
+
+d4  
+    $ every 4 (rev)
+    $ squiz "2 [[6 4] 3] [6*2 2] 4*4" 
+    # n "8 [4 4] [8 4]" 
+    # s "bubble"
+    # gain 1
+
+d3 
+    $ n "4(3,8)"
+    # s "SOPHIE_hihats:1"
+    # gain 0.7
+
+do {
+    resetCycles;
+d2 
+    $ qtrigger 1
+    $ every 8 (rev . striate 8)
+    $ every 8 (# speed "2")
+    $ speed (struct "t(5,16)" $ range 1.25 1.75 sine)
+    # s "SOPHIE_wet_kicks:5"
+    # gain 1.0 
+}
+
+d1 
+    $ n "5 ~ [5 5] <~>" 
+    # s "SOPHIE_subs"
+    # gain 1
+    # legato 2
+
+hush
+
+d1 silence
+d2 silence
+d3 silence
+d4 silence
+d5 silence
+d6 silence
+d7 silence
+d8 silence
+

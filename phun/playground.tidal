@@ -1,0 +1,36 @@
+cps (0.5625)
+
+once
+    $ s "looper" # n 0
+
+asap
+    -- $ iter "[1 2 3 4]/4"
+    -- $ fast "[1 2 3 4]"
+    -- $ whenmod 12 8 (palindrome)
+    -- $ striate (choose [4, 64, 2, 64])
+    -- $ juxBy 0.2 (rev . chop 2)
+    -- $ brak
+    -- $ fast "<1 2> <2 4 6> <0.5 2 4> <8 0.25 4>"
+    -- $ every 4 (fast 2 . (|+| speed "0.5 1 2"))
+    -- $ foldEvery [4] ((|+| n ((run 2))))
+    -- $ every 2 ((|-| speed "1"))
+    -- $ foldEvery [2,3,5] (chop 32)
+    -- $ every "8 6 2 4" (slow 4 . (|+| speed "0.5"))
+    -- $ every "2 4 8 6" (|+| accelerate "0.5 [0.5 -0.25]")
+    -- $ every 3 (striate 4)
+    $ sound "running" 
+    # n 2
+    -- # speed (slow 2 $ range (-1) (-1) sine)
+    -- # accelerate (slow 8 $ (sine -0.5) * 8)
+    -- # begin (fast 5 $ sine * 0.4)
+    # hcutoff "1000/4"
+    # up (offadd (2/8) 2 $ offadd (3/8) 2 $ "[[0 -1 2 9](9,16)]")
+    -- # up (offadd (2/8) 2 $ offadd (3/8) 5 $ "[[0 -3 -5 -7 -9](9,16)]")
+    -- # pan rand
+    -- # speed ((range 1.0 1.5 rand - 0.5))
+    -- # accelerate (fast "[0.25 4 2 3] * 4" $ range (-3) 3 $ sine * (fast "<2 6 8 4>" $ sine))
+    # gain "1.0" # orbit "0"
+    -- # timescale 2
+    -- # timescalewin 2
+
+hush

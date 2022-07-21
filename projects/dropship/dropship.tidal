@@ -1,0 +1,362 @@
+
+-- on salusa secundus
+-- hh enlists the sardaukar
+-- try and get some shrill vocals in minor chords here
+-- droning + striate 2 drums BOOM BOOM ... BOOM BOOM
+
+d2
+    $ striate "128"
+    $ note "e5"
+    # s "SOPHIE_textures:5" 
+    # speed 0.5
+    # begin 0.1
+    # end 0.7
+    # room 0.9
+    # sz 0.6
+    # legato 1
+    # gain 0.8
+
+d2 silence
+
+
+
+-- ABLETON MIDI -- sogawni arp split
+-- night at the palace
+-- conspiracy is afoot
+
+d1 
+    $ chop "128"
+    $ note "ef5*2 <f5*2 e5>"
+    # s "able" 
+    # room 0.5
+    # sz 0.3
+    # legato 1
+    # cps "0.5625"
+
+d1 silence
+
+-- ABLETON MIDI -- All Alone Pad
+-- complements the sogawni arp
+
+d2
+    $ chop "1"
+    $ note "c5"
+    # s "able2"
+    # room 0.5
+    # sz 0.3
+    # legato 2
+
+
+d3 
+    -- $ striate "128"
+    -- $ chop "4"
+    $ note "es6"
+    # s "able"
+
+
+
+hush
+
+
+-- regular tempo -->
+    -- hh enters the palace
+    -- DUNCAN IDAHO fights hh
+-- uptempo --> 
+    -- the bombs fall; duncan's escape
+    -- paul and jessica captured by hh; they use the voice
+
+do
+    {
+        resetCycles;
+
+d2 
+    $ off "0.25" (# crush 5)
+    -- $ every 16 (rev . chop 32)
+    -- $ every 16 (rev . striate 64)
+    -- $ every 4 (chunk 2 (almostAlways (# speed (choose [2, 0.5]))))
+    $ n "{0 <4 15>, 5*2 <1 3>, <[6 3 7] [7 3 6]>}"
+    # s "SOPHIE_wet_kicks"
+    # legato 1
+    # orbit 1
+
+}
+
+hush
+
+let     
+    rcr = "rolandcompurhythm8000"
+    rcr78 = "rolandcompurhythm78"
+in
+d3 
+    -- $ note (scale "minor" $ "d4 ~ ~ d4 ~ ds4 ~ ~")
+    $ struct "t(11,16)"
+    $ note (scale "minor" $ "<d4 ds4>")
+    # sound "donk"
+    -- # drumFrom rcr78 "perc:5"
+    # legato 1
+    # room 0.1
+    # sz 0.1
+    # orbit 4
+
+
+d4 
+    -- $ iter 2
+    $ n "~ [~] [~ [~ ~] [[5 ~ ~]] ~ [5 ~]] ~ [5 5] 5 5 5"
+    # s "SOPHIE_percussion"
+    # up (offadd (3/8) 4 $ "-4")
+    # speed 0.5
+    -- # orbit 10
+    # gain 1
+    # vowel "o"
+    # cps "0.5625"
+
+d5 
+    $ n "~ [~ ~] [8 [8 [8 28 ~ 28] 8] [19 28]]"
+    # s "SOPHIE_wet_kicks"
+    # up (offadd (3/8) 4 $ "2")   
+    # orbit 11
+    # vowel "a"
+    # cps "0.5625"
+
+hush
+
+let 
+    mfb = "mfb512"
+    km1 = "korgm1"
+in
+d1 
+    $ iter 2
+    $ note "~ [[~ ~] ~ c4] [f3 ~ e3 ~ c3] ~ [c3 c3]"
+    # drumFrom km1 "mt"
+    # speed (struct "t" $ range 1.1 1.0 sine)
+    # vowel "o"
+
+d2
+    $ iter 2
+    $ note (scale "minor" $ "e3 [[e3 ~] ~ c4] [f3 ~ e3 ~ f3] ~ [f3 f3]")
+    # drumFrom "korgm1" "ht"
+    # speed (struct "t" $ range 1.25 1.0 sine)
+    # vowel "e"
+
+d1
+    $ n "c2"
+    # s "acidOto3091"
+
+
+
+-- first signs of deceit
+-- dr yue betrays house atreides
+-- armada appears
+-- gurney halleck rallies his men
+-- atreides fights on the steps
+-- sardaukar land
+
+do
+    {
+        resetCycles;
+
+d4
+    $ seqPLoop [
+        (
+            0, 1.5,
+            iter "2"
+            $ rev . striate "4"
+            $ n "~ [9] [9 [11 11*2] ~ [[9 ~ 11 ~ 9]] [11 ~]]"
+            # s "SOPHIE_dry_kicks"
+            # up (offadd (3/8) 8 $ "4")
+            # speed 1
+            # room 0.1
+            # sz 0.1
+            # orbit 8
+            # gain 0.9
+            # cps "0.5625"
+        ),
+        (
+            0, 1.5,
+            iter "2"
+            $ rev . striate "4"
+            $ n "~ [8 ~] [8 [8 [8 ~ 28 ~ 28] ~ 8] [19 28]]"
+            # s "SOPHIE_wet_kicks"
+            # up (offadd (3/8) 4 $ "-2")   
+            -- # orbit 9
+            # gain 0.9
+            # cps "0.5625"
+        ),
+        (
+            0, 1.5,
+            iter "2"
+            -- $ rev . striate "4"
+            $ n "~ [~ ~] [8 [8 [8 28 ~ 28] 8] [28 28]]"
+            # s "SOPHIE_wet_kicks"
+            # up (offadd (3/8) 4 $ "2")   
+            -- # orbit 10
+            # vowel "a"
+            # cps "0.5625"
+        ),
+        (
+            0, 1.5,
+            iter 2
+            -- $ rev . striate "4"
+            $ note (scale "minor" $ "~ [~ ~] [c4 [~ [c4 ~ ~ c3] c4] [e3 c3]]")
+            # drumFrom "korgm1" "ht"
+            # speed (struct "t" $ range 1.25 1.0 sine)
+            # vowel "a"
+            # legato 5
+            # orbit 11
+            # gain 1
+        )
+    ]
+
+    }
+
+hush
+
+d5
+    $ seqPLoop [
+        (
+            0, 1.5,
+            iter 2
+            $ note "~ [[~ ~] ~ c4] [f3 ~ e3 ~ c3] ~ [c3 c3]"
+            # drumFrom "korgm1" "mt"
+            # speed (struct "t" $ range 1.1 1.0 sine)
+            # vowel "e"
+            # legato 5
+            # orbit 0
+            # gain 1
+        )
+        -- (
+        --     0, 1.5,
+        --     iter 2
+        --     $ note (scale "minor" $ "~ [[~ ~] ~ c4] [c4 ~ e3 ~ c3] ~ [c4 c4]")
+        --     # drumFrom "korgm1" "ht"
+        --     # speed (struct "t" $ range 1.25 1.0 sine)
+        --     # vowel "e"
+        --     # legato 5
+        --     # orbit 0
+        --     # gain 1
+        -- )
+    ]
+
+hush
+
+-- low drone following the fall 
+-- the fall transition to --> sietch scenes aka sanctuary
+-- low drone sets the arrival of sardaukar forces
+-- initial donks come in as troops land on sietch roof
+-- donk2 kicks in when fremen ambush
+-- duncan idaho fights the sardaukar
+-- electrical buzz for SHIELD BREACH
+-- how to end?
+    -- picks up tempo + layering drone to something brighter
+    -- to heavy striation for ornithopter flight
+    -- BZZZZZZZ smash end
+
+d1
+    $ ur 16 "{drone:e4 drone:a4 drone:f4 drone:a4, donk2, wb2}"
+    [
+        (
+            "reg_wet_kicks",
+                    every 16 (rev . chop 32)
+                    $ every 4 (chunk 2 (almostAlways (# speed (choose [2, 0.5]))))
+                    $ n "{0 <4 15>, 5*2 <1 3>, <[6 3 7] [7 3 6]>}"
+                    # s "SOPHIE_wet_kicks"
+                    # legato 1
+                    # orbit 1
+        ),
+        (
+            "up_wet_kicks",
+                    off "0.25" (# crush 5)
+                    $ n "{0 <4 15>, 5*2 <1 3>, <[6 3 7] [7 3 6]>}"
+                    # s "SOPHIE_wet_kicks"
+                    # legato 1
+                    # orbit 2
+        ),
+        (
+            "drone",
+                striate "128"
+                $ s "SOPHIE_textures:5" 
+                # speed 0.5
+                -- # accelerate (fast "[0.25 4 2 3] * 4" $ range "<-2>" "<2>" $ sine * (fast "<2 6 8 4>" $ sine))
+                # begin 0.1
+                # end 0.7
+                # room 0.5
+                # sz 0.5
+                # legato 1
+                # orbit 3
+        ),
+        (
+            "donk",
+                note (scale "minor" $ "d4 ~ ~ d4 ~ ds4 ~ ~")
+                # sound "donk"
+                # legato 0.75
+                # gain 0.9
+                # orbit 4
+        ),
+        (
+            "wb",
+                note (scale "minor" $ "d4 ~ ~ d4 ~ ds4 ~ ~")
+                # drumFrom "rolandcompurhythm78" "perc:5"
+                # legato 0.75
+                # gain 0.9
+                # orbit 5
+        ),
+        (
+            "donk2",
+                struct "t(11,16)"
+                -- struct "t(15,16)"
+                $ every 8 (striate "8 4 1")
+                $ every 16 (chop "32")
+                -- $ off "0.5" (struct "t(11,11,<0>)")
+                $ note (scale "minor" $ "<d4 ds4>")
+                # sound "donk"
+                # legato 1
+                # gain 1
+                # orbit 6
+        ),
+        (
+            "wb2",
+                struct "t(11,16)"
+                -- struct "t(15,16)"
+                -- $ off "0.5" (struct "t(11,11,<0>)")
+                $ note (scale "minor" $ "<d4 ds4>")
+                # drumFrom "rolandcompurhythm78" "perc:5"
+                # legato 1
+                # gain 1
+                # orbit 7
+        ),
+        (
+            "dkicks",
+                n "1(6,8)"
+                -- n "<1(9,16) 1(11,16)>"
+                # s "SOPHIE_dry_kicks"
+                # legato 1
+        )
+    ]
+    [
+        (
+            "a4",
+            (
+                |+ note "a4"
+            )
+        ),
+        (
+            "b4",
+            (
+                |+ note "b4"
+            )
+        ),
+        (
+            "f4",
+            (
+                |+ note "f4"
+            )
+        ),
+        (
+            "e4",
+            (
+                |+ note "e4"
+            )
+        )
+    ]
+
+hush

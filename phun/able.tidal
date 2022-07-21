@@ -1,0 +1,76 @@
+bpm 120
+
+once
+    $ n "0"
+    # s "able"
+    # timescale 10
+    # timescalewin 2
+
+once
+    $ splice 8 "2 2"
+    $ s "iter"
+    # timescale 10
+    # timescalewin 1
+
+once 
+    $ note 
+        (   
+            scale "chromatic" 
+            $ arp (choose["thumbdownup"]) 
+            $ slow 1
+            "{<d4'min7 c4'min5S6>, a4'm69 b4'min7}"
+        )
+    # s "superhoover"
+    # legato 1
+    # room 0.3
+    # sz 0.3
+    # orbit 1
+    # octave "4"
+    # timescale 20
+    # timescalewin 1
+
+once
+    $ s "engine"
+    # orbit 10
+
+d1
+    $ stack [
+        n "0*2 [2 22 12 3 3]"
+        # s "drunkDwarf"
+        # orbit 1
+        # room 0.3
+        # sz 0.3
+        # legato 0.09
+        # pF "freq" "20 25 35 45 50"
+        # pF "k" 0.9
+        # pF "dur" 0.5
+        # pF "rand" 8
+        ,
+        n "~ 1 [12 ~] 0"
+        # s "drunkDwarf"
+        # orbit 2
+        # room 0.3
+        # sz 0.3
+        # legato 0.09
+        # pF "freq" 20
+        # pF "k" 0.9
+        # pF "dur" 0.5
+        # pF "rand" 8
+    ]
+
+do
+{
+    resetCycles;
+d1
+    $ every 8 (rev . chop 32)
+    $ s "iter"
+    # timescale 1
+    # orbit 8
+}
+
+
+once
+    $ s "ChMach2"
+    # timescale 20
+    # timescalewin 1
+

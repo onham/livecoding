@@ -1,0 +1,63 @@
+bpm 160
+
+do
+    let mx = [0,0,0,1,0]
+    let al16 = "alesissr16"
+    let 
+        shift' n p = (n <~) $ p
+        shift p = (1 <~) $ p
+        bonk p =
+            (# delay (range 0.1 0.3 $ shift' 1881 $ rand))
+            $ (# delayt (shift' 1882 $ (choose [(1/2048),(1/1024)..(1/32)])))
+            $ (# delayfb (range 0.7 0.99 $ shift' 1883 $ rand)) $ p
+    all $ ((# crush "[1,2,3,4,5]") . (# squiz 0.8))
+    d1
+        $ whenmod 16 14 (|* gain 0)
+        $ n "[0 0!3?] [~ 0!2 ~] [0*4]? ~"
+        # s "[jungle:12]"
+        # legato (choose[0.8,2,1,3]) # speed 0.8 # shape 0.95
+        # gain (mx !! 0 * 0.75) 
+        # pan (rand * 0.1 + 0.45)
+    d2
+        $ sometimesBy 0.2 (ply 4)
+        $ s "peri:13*16?"
+        # legato rand # speed (rand + 1)
+        # room 0.15 
+        # sz 0.7
+        # gain (mx !! 1)
+    d3
+        $ whenmod 32 30 (|* gain 0)
+        $ every 8 ((ply "1 [2 4]") . (fast "4 8"))
+        $ rarely (ply 4) 
+        $ s "~ bass2 ~ [bd ~ ~ bd?]" 
+        # shape 0.9 
+        # n 1
+        # room 0.15 
+        # sz 0.8 
+        # legato 2
+        # gain (mx !! 2 * 0.7) 
+        # pan 0.3
+    d4
+        $ bonk
+        $ chunk 4 (spreadf [hurry 2,(|* gain 0)]) $ chop "<2 4>" $ almostNever (ply 4)
+        $ s "feel:5*8"
+        # n (slow 4 (run 32)) # shape 0.99 # speed (rand + 1)
+        # gain (mx !! 3 * 0.6) 
+        # pan 0.2 
+        # hpf 400 
+        # coarse (soak 4 (|* 2) "2 4")
+    d5
+        $ whenmod 7 5 (degrade)
+        $ while "t(3,8)" (|+ gain 0.1)
+        $ (# lpf (range 200 3000 (slow 16 tri)))
+        $ s "superhoover(5,8,<0 1 2>)" 
+        # legato 1
+        # up ("{0 7 2 3 10 3 2 5 0 -2 2 -5 -4 0 3 7 8 12 14 15}%12" - 4)
+        # room 0.9 
+        # sz 0.9 
+        # delay 0.95 
+        # delaytime (1/3) 
+        # delayfb 0.8
+        # gain (mx !! 4 * 0.75)
+        # lpq 0.15
+        -- # lpf 1000

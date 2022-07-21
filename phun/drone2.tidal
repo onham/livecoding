@@ -1,0 +1,54 @@
+bpm 140
+
+let entropy scl b ts tsw = stack
+        [
+            note (scale scl $ b) 
+            # s "entropy" 
+            # timescale ts 
+            # timescalewin tsw
+        ]
+
+let drone scl b ts tsw = stack
+        [
+            note (scale scl $ b) 
+            # s "superdrone" 
+            # timescale ts 
+            # timescalewin tsw
+        ]
+
+let night scl b ts tsw = stack
+        [
+            note (scale scl $ b) 
+            # s "forestbird" 
+            # timescale ts 
+            # timescalewin tsw
+        ]
+
+once
+    $ stack
+        [
+            entropy 
+                "minor"
+                "{2, 7}"
+                10
+                1
+            # pF "decay" 0.5
+            # pF "width" 0.5
+            # orbit 9
+            # room "<0.2>"
+            # sz "<0.2>"
+        ]
+
+once
+    $ stack
+        [
+            night
+                "chromatic"
+                "{2,7}"
+                10
+                4
+            # orbit 10
+            # room "0.3"
+            # sz "0.3"
+        ]
+

@@ -1,0 +1,14 @@
+d5  $ accelerate "1 4 [8 1] [3 1 3]"
+    # s "arpy:1 arpy:8 arpy:1 [arpy:4 arpy:4]" 
+    -- # accelerate (slow 4 $ (sine -0.5) * 8)
+    # crush "7 6"
+
+d1 $ squiz "2 [[6 4] 3] [6*2 2] 4*4" # n "8 [4 4] [8 4]" # s "techno"
+
+d2 $ n "1*4" # s "bd"
+
+d3 $ n "1*2" # s "hh27"
+
+    # silence
+
+hush

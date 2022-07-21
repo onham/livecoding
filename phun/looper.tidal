@@ -1,0 +1,13 @@
+linput = pI "linput"
+lname = pS "lname"
+
+once $ s "looper"
+
+d2 $ s "bd"
+
+
+d1 
+    $ s "loop"
+    # up (offadd (2/8) 2 $ offadd (3/8) 2 $ "[[0 -3 -5 -7 -9](9,16)]")
+    -- # speed (slow 2 $ range (-2) (-1) sine)
+    # accelerate (fast "[0.25 4 2 3] * 4" $ range (-3) 3 $ sine * (fast "<2 6 8 4>" $ sine))

@@ -1,0 +1,99 @@
+bpm 140
+
+do {
+    resetCycles;
+d3 
+    $ every 128 (#speed "-1")
+    -- $ every 128 (rev . striate 32)
+    $ ur 8 "{<wkicks wkicks:squeeze>, fx subs, donk ~, clap, ~ <guti jdwi>}"
+    -- $ ur 8 "{<wkicks wkicks:squeeze>}"
+    [
+        (
+            "wkicks", 
+                every 8 (rev . chop 32)
+                -- $ every 8 (slow "4 [3 2]")
+                -- $ zoom (0.25,0.75).(hurry "<1 2>")
+                $ n "<4(5,8) 4(3,8)> <3 [6 2*4]>"    
+                # s "SOPHIE_wet_kicks" 
+                # gain 1.0
+                # orbit 0
+        ),
+        (
+            "fx",
+                every 4 (striate "8")
+                $ n "<2>"
+                # s "SOPHIE_fx"
+                -- # pan rand
+                # gain 1.1
+                # orbit 1
+        ),
+        (
+            "subs",
+                every 8 (rev)    
+                $ n "3 <8*2 6>"
+                # s "SOPHIE_subs"
+                # legato 1
+                # gain 1
+                # orbit 2
+        ),
+        (
+            "clap",
+                every 4 (rev)
+                $ splice 4 "0 <[1 2] 3> <3*2 1*4> [4 5]"
+                $ s "SOPHIE_claps:0"
+                # legato 1
+                # gain 0.9
+                # orbit 3
+        ),
+        (
+            "donk",
+                -- every 128 (rev . striate 16)
+                -- (~>) (choose [0, 0.5, 0.25])
+                struct "t(11,16,<3,6>)"
+                $ note "<c5'm6 [g4'm6 a4'm6]>"
+                # s "donk"
+                # legato 4
+                # gain 0.7
+                # orbit 4
+        ),
+        (
+            "guti",
+                every "1 3 5" (off "0.5" (|+ n "1"))
+                $ every "8" (|+| accelerate "0.5 [0.5 -0.25]")
+                $ s "get_used_to_it"
+                # speed 1
+                # up (offadd (2/8) 2 $ offadd (3/8) 5 $ "[[0 -3 -5 -7 -9](9,16)]")
+                # hcutoff "[2000 1000 500]/4"
+                # orbit 5
+                # room 0.3
+                # sz 0.3
+                # pan rand
+                # gain 1.2
+        ),
+        (
+            "jdwi",
+                every "1 3 5" (off "0.5" (|- n "1"))
+                $ every "8" (|+| accelerate "0.5 [0.5 -0.25]")
+                $ s "get_used_to_it:1"
+                # speed 1
+                # up (offadd (2/8) 2 $ offadd (3/8) 5 $ "[[0 -3 -5 -7 -9](9,16)]")
+                # hcutoff "[2000 1000 500]/4"
+                # orbit 6
+                # room 0.3
+                # sz 0.3
+                # pan rand
+                # gain 1.2
+        )
+    ]
+    [
+        (
+            "squeeze",
+        (# crush 6
+        )
+        )
+    ]
+}
+
+
+
+hush

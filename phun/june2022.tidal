@@ -1,0 +1,46 @@
+bpm 140
+
+let kick a b = struct a $ stack 
+        [
+            s "peri" 
+            # n 0
+            # legato b 
+        ]
+
+let bsynth a sl scl ar b c = struct a $ stack
+        [
+            note (slow sl $ scale scl $ arp ar b) 
+            # s "superhoover" 
+            # legato c
+        ]
+
+let snare a b = struct a $ stack 
+        [
+            s "jungle"
+            # n 12 
+            # legato b
+        ]
+
+let
+    patKick = binaryN 16 871254 
+in
+d1
+    $ stack [
+        kick 
+            patKick
+            1
+    ]
+
+-- growly bass underlay
+d2
+    -- $ roll
+    $ swingBy (1/14) 16
+    $ whenmod 16 15 (shuffle 8)
+    $ whenmod 4 3 (while (robo) (spreadr ($) [(#krush "1 .. 10"),(#waveloss ((irand 8)*6+8))]))
+    $ whenmod 4 3 (sometimes (while "f!3 t" (linger 0.125)))
+    $ every 4 (while (sometimes inv (inv robo)) ((|> n 4).(rarely (#speed "1 1 .. 2"))))
+    $ slice 16 (cat [ "<0!3 7>*[1|1|2] <8 6> 1 <9 10> 0 3 [1|7] [2|4] ~ 139 [7|8] 4 3 9 15"])
+    $ n "0 3 2 1"
+    # s "bass1:2"
+    # legato 2
+    # nudge (fast 8 "0 0.02")

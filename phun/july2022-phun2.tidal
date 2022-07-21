@@ -1,0 +1,27 @@
+let 
+    shift' n p = (n <~) $ p
+    shift p = (1 <~) $ p
+    bonk p =
+        (# delay (range 0.1 0.3 $ shift' 1881 $ rand))
+        $ (# delayt (shift' 1882 $ (choose [(1/2048),(1/1024)..(1/32)])))
+        $ (# delayfb (range 0.7 0.99 $ shift' 1883 $ rand)) $ p
+
+d1
+    $ bonk
+    $ s "sd*4"
+
+once
+    -- $ ((# crush "[1,2,3,4,5]") . (# squiz 0.8))
+    -- $ bonk
+    $ chop "<2 4>" $ almostNever (ply 4)
+    $ s "superwavemechanics"
+    # n (slow 4 "0 2 3") # shape 0.25 # speed (rand + 1)
+    # gain 0.7
+    # timescale 20
+    # timescalewin 1
+    -- # pan 0.2 
+    # lpf 800 
+
+d1 
+    $ s "superspook"
+    # n "0"

@@ -1,0 +1,47 @@
+bpm 140
+
+
+let kick a b = struct a $ stack 
+        [
+            s "SOPHIE_dry_kicks" 
+            # n 1
+            # legato b 
+        ]
+
+let bsynth a sl scl ar b c = struct a $ stack
+        [
+            note (slow sl $ scale scl $ arp ar b) 
+            # s "superhoover" 
+            # legato c
+        ]
+
+let snare a b = struct a $ stack 
+        [
+            s "jungle"
+            # n 12
+            # legato b
+        ]
+
+let
+    patSynth = binaryN 4 "<2046 3333> <3333 4837>"
+    patSynth2 = binaryN 16 "<3330234>"
+    patSynth3 = binaryN 16 "<4234678 23445>"
+    patSynth4 = binaryN 16 "<3234234 23445>"
+    patKick = binaryN 16 24312 
+    patKick2 = binaryN 16 61234
+    patKick3 = "t(<4 4 6 <6 [4 6]>>, 16)" 
+    patSnare = binaryN 16 14421
+    patSnare2 = binaryN 16 42821
+    patSnare3 = binaryN 16 452381
+    patSnare4 = binaryN 16 234
+in
+d1
+    $ stack [
+        kick
+            patKick
+            2
+        ,
+        snare 
+            patSnare
+            1
+    ]

@@ -1,0 +1,15 @@
+
+d1 $ smash' 8 [3,5,2,1] $ note "c*2 a f!3 e" # s "bass1:3"
+
+d1 $ n (flatpat $ listToPat [[0,4,7],[(-12),(-8),(-5)]]) # s "superpiano" # sustain 2
+
+d1 $ interlace (sound  "bd sn kurt") (every 3 rev $ sound "bd sn:2")
+
+d1
+    $ iter 5
+    $ while "t f f f" (0.125 ~>)
+    # s "jungle"
+
+bpm 140
+
+hush

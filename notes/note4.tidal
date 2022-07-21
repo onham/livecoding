@@ -1,0 +1,17 @@
+d1 
+    $ off "0.125" (|+ n "<7 12 -5>")
+    $ every 8 (rev)
+    $ n (slow 2 $ scale "ritusen" $ "1*4 5*8 4*4 3*8")
+    |+ n (scale "ritusen" $ "<-2 -4 -3 1>*2")
+    |+ n (scale "ritusen" $ "<[2 -5] [3 -1]>*2")
+    |+ n (scale "ritusen" $ "<[-4 4 1 -5] [4 -3 2 7]>")
+    # s "quan2"
+    # legato 0.8
+    # room 0.6
+    # sz 0.8
+    # pF "clamp" 0.35
+    # pF "res" 0.35
+    # gain 0.8
+
+hush
+

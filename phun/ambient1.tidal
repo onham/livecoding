@@ -1,0 +1,19 @@
+bpm 140
+
+asap
+    $ sound "oklou-boiler-room:6" 
+    -- # speed (slow 32 $ range (-1) (-1) sine)
+    -- # begin (fast 5 $ sine * 0.4)
+    -- # hcutoff "1000/4"
+    # up (offadd (2/8) 2 $ offadd (3/8) 2 $ "[[0 -1 2 9](9,16)]")
+    -- # up (offadd (2/8) 2 $ offadd (3/8) 5 $ "[[0 -3 -5 -7 -9](9,16)]")
+    -- # pan rand
+    -- # speed 0.7
+    -- # speed ((range 1.0 1.5 rand - 0.5))
+    -- # gain "1.0" 
+    # orbit "0"
+    -- # room 0.1
+    -- # sz 0.1
+    # gain 2
+    -- # timescale 1
+    -- # timescalewin 1

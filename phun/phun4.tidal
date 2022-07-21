@@ -1,0 +1,22 @@
+d1
+    $ every 4 (|+| note "<5>")
+    $ note (scale "minor" $ "7*2 [3 5] ~ 4*4 ~")
+    # s "able"
+
+setcps(9/16)
+
+let 
+    doep = "doepferms404"
+in
+d1
+    $ note "<7 ~> <[7*2] ~> ~ <[7*2] 7 ~ ~> <~ ~ ~ 7*4>"
+    -- $ note "<7 ~> [7*2] ~ [7*2]"
+    # drumFrom doep "lt"
+    -- # crush "<9>"
+    # legato 2
+    # cps (12/16)
+    # gain 1.1
+    # orbit 0
+
+
+hush
