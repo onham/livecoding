@@ -41,9 +41,9 @@ do
         $ bonk
         $ chunk 4 (spreadf [hurry 2,(|* gain 0)]) $ chop "<2 4>" $ almostNever (ply 4)
         $ s "feel:5*8"
-        # n (slow 4 (run 32)) # shape 0.99 # speed (rand + 1)
+        # n (slow 4 (run 32)) # shape 0.7 # speed (rand + 1)
         # gain (mx !! 3 * 0.6) 
-        # pan 0.2 
+        # pan 0.5 
         # hpf 400 
         # coarse (soak 4 (|* 2) "2 4")
     d5

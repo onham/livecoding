@@ -1,3 +1,5 @@
+bpm 140
+
 let 
     shift' n p = (n <~) $ p
     shift p = (1 <~) $ p
@@ -25,3 +27,18 @@ once
 d1 
     $ s "superspook"
     # n "0"
+
+d1
+    $ bonk
+    $ chop "<2 4>" $ almostNever (ply 4)
+    $ s "digi1"
+    # timescale 4
+    # timescalewin 24
+
+d1 
+    $ while (binaryN 16 11011011) (chop "<2 4>") 
+    $ struct "t*8" 
+    $ n "c4" 
+    # s "supersaw" 
+    # legato 0.5
+    # nudge (fast 4 "0 0.01")

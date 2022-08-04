@@ -19,9 +19,10 @@ let
     roll' p = stutWith 2 (0.0625*3) id $ p
     rollSlow howOften p = sometimesBy howOften (stutWith 2 (0.125*3) id) $ p
     rollFast howOften p = sometimesBy howOften (stutWith 2 (0.0625*3/2) id) $ p
-    rewind p = (1 <~) p
-    rewind' a p = (a <~) p
     shiftB a b = whenmod 16 4 (while a (b <~))
     shiftF a b = whenmod 16 4 (while a (b ~>))
     mute = const silence
     warpF = whenmod 16 15 (rev . striate 8)
+    shift' n p = (n <~) $ p
+    shift p = (1 <~) $ p
+    bonk p = (# delay (range 0.1 0.3 $ shift' 1881 $ rand)) $ (# delayt (shift' 1882 $ (choose [(1/2048),(1/1024)..(1/32)]))) $ (# delayfb (range 0.7 0.99 $ shift' 1883 $ rand)) $ p
