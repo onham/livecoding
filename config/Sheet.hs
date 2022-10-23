@@ -22,11 +22,11 @@ stacker = Map.fromList
 allowedAndNeededKeys = ["lead", "bass", "key", "drums", "pad", "clock", "pod", "arp"]
 addSilence pt = map (\x -> if (Map.member x (pt)) then (x, pt ! x) else (x, silence)) allowedAndNeededKeys
 filledWithSilence parts = map (\x -> addSilence x) parts
-transformBy _ [] = []
-transform x = transformBy 1 x
 transformBy y [x] = [(show y, snd x)]
 transformBy y (x:xs) = (show y, snd x) : (transformBy (y + 1) xs)
+transform x = transformBy 1 x
 transformStacker parts = stacker $ map (\x -> (fst $ head x, transform x)) (transpose $ filledWithSilence parts)
+transformBy _ [] = []
 
 -- Permanent filter transition
 lpfBy x d t = ( cutoff (15000 - (15000 - d) * (rotR t $ slow x envL)))
