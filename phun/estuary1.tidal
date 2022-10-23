@@ -1,0 +1,198 @@
+d1 
+    $ stack 
+        [
+            cat 
+                [
+                    often
+                        (
+                            |+| speed "-1 -4"
+                        )
+                        $ slow "0 2 4 8"
+                        $ struct "[111111][0111][0001]"
+                        $ x (range "0.5" "0.75" $ fast "1.25" cosine) 
+                        # y (range "0.05" "0.55" $ slow "1.5" sine) 
+                        # pS "keep_only_equal_s" "foley"
+                        # pan (fast 14 $ cosine)
+                        # up "-9 <-1 12>"
+                        # cutoff (range 500 1000 $ fast 12 $ tri)
+                        ,
+                        struct "1111"
+                        $ x (range "0.05" "0.1" $ fast "1.275" cosine) 
+                        # y (range "0.2" "0.75" $ slow "1.45" sine) 
+                        # pS "keep_only_equal_s" (choose["jungbleep","pulse"])
+                        # speed "-3 1 -1"
+                        # gain 0.6
+                ]
+            # gain 0.75
+        ]
+
+d2
+    $ slow 4
+    $ every 3 (hurry 2) 
+    $ stack 
+        [ 
+            up "[-8] <16 8>",
+            up (shuffle 3 "6 8 10 13"),
+            up (shuffle 4 "10 15 18 8")
+        ]
+    # s (choose["superpiano"])
+    # n "[0 1 2 3]"
+    # speed (choose[-0.5])
+    # crush (choose[8,10])
+    # bandf (slow 12 $ range 20 600 sine)
+    # octave (choose[3,4])
+    # gain 0.65
+    # pan rand
+    # end 1
+    # orbit 0
+
+d3 
+    $ palindrome 
+    -- $ slow 2
+    $ fast 0.75 
+    $ stack 
+    [
+        up "[-8]*16",
+        up (shuffle 3 "6 8 10 13"),
+        up (shuffle 4 "10 15 18 8"),
+        up (shuffle 4 "13 18 20 6")
+    ]
+    -- # s "<bottle bd tabla bottle toys coins yeah tabla msg coins>"
+    # x (range "0.5" "0.75" $ fast "1.25" cosine) 
+    # y (range "0.05" "0.55" $ slow "1.5" sine) 
+    # pS "keep_only_equal_s" "foley"
+    -- # n (scramble 8 "0 1 2 3 4 5 6 7")
+    # speed 0.5
+    -- # cutoff (slow 6 $ range 20 2200 sine)
+    # bandf (slow 12 $ range 20 3000 sine)
+    # gain 0.9
+    # pan rand
+    # end 0.3
+    -- # room 0.2
+    -- # sz 0.2
+    # orbit 10
+
+
+
+do
+let
+    part = "1" -- <- this can be changed with midi/osc
+    parts = transformStacker [
+        stacker [
+          ("lead", 
+            stack 
+                [
+                    cat 
+                        [
+                            often
+                                (
+                                    |+| speed "-1 -4"
+                                )
+                                $ slow "0 2 4 8"
+                                $ struct "[111111][0111][0001]"
+                                $ x (range "0.5" "0.75" $ fast "1.25" cosine) 
+                                # y (range "0.05" "0.55" $ slow "1.5" sine) 
+                                # pS "keep_only_equal_s" "foley"
+                                # pan (fast 14 $ cosine)
+                                # up "-9 <-1 12>"
+                                # cutoff (range 500 1000 $ fast 12 $ tri)
+                                ,
+                                struct "1111"
+                                $ x (range "0.05" "0.1" $ fast "1.275" cosine) 
+                                # y (range "0.2" "0.75" $ slow "1.45" sine) 
+                                # pS "keep_only_equal_s" (choose["jungbleep","pulse"])
+                                # speed "-3 1 -1"
+                                # gain 0.6
+                        ]
+                    # gain 0.75
+                ]
+            )
+          ,
+          ("pad", 
+            slow 4
+            $ every 3 (hurry 2) 
+            $ stack 
+                [ 
+                    up "[-8] <16 8>",
+                    up (shuffle 3 "6 8 10 13"),
+                    up (shuffle 4 "10 15 18 8")
+                ]
+            # s "gtr"
+            # n "[0 1 2 3]"
+            # speed (choose[-0.5])
+            # crush (choose[8,10])
+            # bandf (slow 12 $ range 20 600 sine)
+            # octave (choose[3,4])
+            # gain 0.45
+            # pan rand
+            # end 1
+            # orbit 0
+            )
+        ]
+        ,
+        stacker [
+          ("lead", 
+            palindrome 
+            -- $ slow 2
+            $ fast 0.75 
+            $ stack 
+            [
+                up "[-8]*16",
+                up (shuffle 3 "6 8 10 13"),
+                up (shuffle 4 "10 15 18 8"),
+                up (shuffle 4 "13 18 20 6")
+            ]
+            -- # s "<bottle bd tabla bottle toys coins yeah tabla msg coins>"
+            # x (range "0.5" "0.75" $ fast "1.25" cosine) 
+            # y (range "0.05" "0.55" $ slow "1.5" sine) 
+            # pS "keep_only_equal_s" "foley"
+            -- # n (scramble 8 "0 1 2 3 4 5 6 7")
+            # speed 0.5
+            # cutoff (slow 6 $ range 20 2200 sine)
+            # bandf (slow 12 $ range 20 3000 sine)
+            # gain 0.75
+            # pan rand
+            -- # end 0.3
+            # end 0.7
+            # room 0.2
+            # sz 0.2
+            # orbit 3
+            )
+        ]
+        ,
+        stacker [
+          ("lead", 
+            stack 
+                [
+                    cat 
+                        [
+                            often
+                                (
+                                    |+| speed "-1 -4"
+                                )
+                                $ slow "0 2 4 8"
+                                $ struct "[111111][0111][0001]"
+                                $ x (range "0.5" "0.75" $ fast "1.25" cosine) 
+                                # y (range "0.05" "0.55" $ slow "1.5" sine) 
+                                # pS "keep_only_equal_s" "foley"
+                                # pan (fast 14 $ cosine)
+                                # up "-9 <-1 12>"
+                                # cutoff (range 500 1000 $ fast 12 $ tri)
+                                ,
+                                struct "1111"
+                                $ x (range "0.05" "0.1" $ fast "1.275" cosine) 
+                                # y (range "0.2" "0.75" $ slow "1.45" sine) 
+                                # pS "keep_only_equal_s" (choose["jungbleep","pulse"])
+                                # speed "-3 1 -1"
+                                # gain 0.6
+                        ]
+                    # gain 0.75
+                ]
+            )
+        ]
+      ]
+    --
+    seg orb key = orbit orb <| ur 16 ("2")  (parts ! key) []
+    --
+    --
+d1 $ stack [seg 0 "lead" , seg 1 "bass", seg 2 "key", seg 3 "pad", seg 4 "arp", seg 5 "drums" ]

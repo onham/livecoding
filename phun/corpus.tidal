@@ -1,0 +1,127 @@
+bpm 140
+
+-- creepy xenomorph alien ellen ripley thing
+do
+{
+    resetCycles;
+d1
+    $ every 16 (rev.striate 64)
+    $ every 16 (hurry "2 0.5 -1")
+    $ every 2 (chunk 4 (almostAlways (# speed (choose [2, 0.5]))))
+    -- $ bonk
+    -- $ chunk 4 (spreadf [hurry 2,(|* gain 0)]) $ chop "<2 4>" $ almostNever (ply 4)
+    $ struct (binaryN 8 "<223 343> <37 437>")
+    $ x (range "0.15" "0.4" $ fast "0.5" sine) 
+    # y (range "0.45" "0.65" $ slow "2" cosine) 
+    # timescale 1
+    # timescalewin 1
+    # octave 3
+    # c "w" 
+    # room 0.3
+    # sz 0.3
+    # gain 0.9
+    # orbit 0
+}
+
+d2
+    -- $ every 4 (rev.striate 32)
+    -- $ every 8 (chunk 4 (almostAlways (# speed (choose [2, 0.5]))))
+    -- $ chunk 4 (spreadf [hurry 0.5,(|* gain 0)]) $ chop "<2 4>" $ almostNever (ply 4)
+    $ slow 1
+    -- $ struct robo
+    $ struct (binaryN 8 "<223 343> <37 437>")
+    $ x (range "0.25" "0.375" $ fast "1.75" cosine) 
+    <| prog s1 "5@3 4@2 2 3" |+ note 7
+    # y (range "0.25" "0.4" $ slow "1.85" perlin) 
+    <| prog s3 "8 3@2 5@2 1" |- note 5
+    # pS "keep_only_equal_s" "SOPHIE_textures"
+    # octave 4
+    -- # timescale "<1.25 1.5 2>"
+    -- # timescalewin "<1 1.5 2>"
+    # c "r"
+    # room 0.3
+    # sz 0.3
+    # gain 0.9
+    # orbit 1
+
+s2 = sheet {
+  numerals = every 2 (rev) 
+--   "<6 5 2 2>"
+  "<1 3 5 7>"
+  }
+
+s1 = sheet {numerals = every 2 (rev) "<1 1 4 5>"}
+
+
+let 
+    al16 = "alesissr16"
+in
+d2
+    -- $ every 4 (bonk)
+    -- $ chunk 4 (spreadf [hurry 0.5,(|* gain 0)]) $ chop "<2 4>" $ almostNever (ply 4)
+    $ struct robo
+    -- $ struct (binaryN 8 "<2046 3333> <3333 4837>")
+    -- $ every 16 (rev.(# speed "-1"))
+    -- $ shiftB "f f f t" 0.125    
+    $ off "0.125" (|+ n "<7 12 -5>")
+    $ weaveWith 4
+        (
+        x (range "0.25" "0.375" $ fast "1.75" cosine) 
+        <| prog s1 "5@3 4@2 2 3" |+ note 7
+        # y (range "0.25" "0.4" $ slow "1.85" perlin) 
+        <| prog s3 "8 3@2 5@2 1" |- note 5
+        # pS "keep_only_equal_s" "glitch"
+        )
+    [     
+        roll'
+        -- ghost,
+        -- rollspeed,
+        -- splice 4 "0 .. 2",
+        -- splice 2 "<1 2> <3 [2 3]>",
+        -- hurry "1.25 0.5",
+        -- (# timescale "2 2.25 2.5")
+    ]
+    -- # nudge (fast 8 "0 0.01")
+    # gain 0.85
+
+
+s3 = s1 {
+  mode = "minor", 
+--   key = "<c g d a>",
+--   numerals = "<1 6 3 5>", 
+  sndDom = "<f t f f>"
+  }
+
+d1
+    $ stack [
+        id
+        -- $ struct "t(3,8)"
+        -- $ slow 8
+        -- $ roll'
+        -- $ rollvowel
+        -- $ hurry "1.25 0.5"
+        -- $ fast "{1!4 2}%7"
+        -- $ slow "{1!4 2}%8"
+        -- $ every "8 6 2 4" (slow 4 . (|+| speed "0.5"))
+        -- $ every "2 4 8 6" (|+| accelerate "0.5 [0.5 -0.25]")
+        $ every 3 (striate 4)
+        -- $ roll'
+        $ splice 2 "<1 2> <3 [2 3]>"
+        $ splice 4 "0 .. 2"
+        -- $ twoglit'
+        -- $ shiftF "t f f f" "0.125"
+        $ shiftB "f f f t" "0.125"
+        $ off "0.125" (|+ n "<-5 -12>")
+        $ x (range "0.13" "0.25" $ fast "0.15" sine) 
+        <| prog s3 "1 5 7@2 3 6 8@2" |+ note 7 
+        # y (range "0.2" "0.5" $ slow "2" cosine) 
+        <| prog s3 "1 5 7@2 3 6 8@2" |+ note 7 
+        # pS "keep_only_equal_s" "feel"
+        -- # timescale "<2 4 2.25 2.5>"
+        -- # speed (slow 2 $ range (-1) (-1) sine)
+        -- # speed ((range 1.0 1.5 rand - 0.5))
+        -- # accelerate (fast "[0.25 4 0.5 2] * 4" $ range (-3) 3 $ sine * (fast "<2 6 8 4>" $ sine))
+        # sz 0.3
+        # room 0.3
+        # octave 3
+    ]

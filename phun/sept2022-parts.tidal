@@ -1,0 +1,136 @@
+bpm 140
+
+s1 = sheet {
+  numerals = every 2 (rev) "<1 1 4 5>",
+  mode = "minor"
+}
+
+s2 = s1 {
+  mode = "minor",
+  numerals = "<1 6 3 5>"
+}
+
+d1
+  $ slow 2
+  $ struct "t(5,8)"
+  $ x (range "0.05" "0.1" $ fast "1.25" cosine) 
+  # y (range "0.05" "0.55" $ slow "1.5" sine) 
+  # pS "keep_only_equal_s" "foley"
+  # timescale (choose[2,4,1])
+  # timescalewin (choose[1,2,4])
+  # legato 2
+  # pan rand
+  # gain 1
+  # orbit 0
+  # room 0.3
+  # sz 0.3
+
+do
+let
+    part = "1" -- <- this can be changed with midi/osc
+    parts = transformStacker [
+        stacker [
+          ("lead", 
+            slow 16
+            -- $ splice 2 "<1 2> <3 [2 3]>"
+            -- $ hurry "1.25 0.5"
+            -- $ roll'
+            -- $ twoglit'
+            $ shiftF "t f f f" "0.125"
+            $ shiftB "f f f t" "0.125"
+            $ off "0.125" (|+ n "<-5 -12>")
+            $ s (choose["superprimes"]) <| prog s1 "6 4@2 [3 5@2] 3" |+ note 5
+            # octave (choose[1])
+            # pan rand
+            # timescale (choose[1.25,1.5,2,4])
+            # timescalewin (choose[1,1.5,2])
+            # gain 0.2
+            # orbit 9
+            # room 0.3
+            # sz 0.3
+            )
+          ,
+          ("pad", 
+            slow 8
+            $ splice 2 "<1 2> <3 [2 3]>"
+            -- $ hurry "1.25 0.5"
+            -- $ roll'
+            -- $ twoglit'
+            -- $ shiftF "t f f f" "0.125"
+            $ shiftB "f f f t" "0.125"
+            $ off "0.125" (|+ n "<-5 -12>")
+            $ s (choose["draft"]) <| prog s2 "1 5 7@2 3 6 8@2" |+ note 5
+            # octave (choose[3,4])
+            # pan 0.5
+            # timescale (choose[2.25,2.5,4])
+            # timescalewin (choose[1,1.5,2])
+            # gain 0.9
+            # orbit 8
+            # room 0.3
+            # sz 0.3
+            )
+        ]
+        ,
+        stacker [
+          ("lead", 
+            slow 8
+            $ splice 2 "<1 2> <3 [2 3]>"
+            -- $ hurry "1.25 0.5"
+            -- $ roll'
+            -- $ twoglit'
+            -- $ shiftF "t f f f" "0.125"
+            -- $ shiftB "f f f t" "0.125"
+            $ off "0.125" (|+ n "<-5 -12>")
+            $ s (choose["draft"]) <| prog s2 "1 5 7@2 3 6 8@2" |+ note 5
+            # octave (choose[3,4])
+            # pan 0.5
+            # timescale (choose[2.25,2.5,4])
+            # timescalewin (choose[1,1.5,2])
+            # gain 0.9
+            # orbit 7
+            # room 0.3
+            # sz 0.3
+            )
+          , 
+          ("drums", 
+            struct (robo)
+            $ x (range "0.35" "0.375" $ fast "0.775" cosine) 
+            # y (range "0.15" "0.3" $ slow "1.15" sine) 
+            # pS "keep_only_equal_s" "foley"
+            # timescale (choose[2,4,1,0.5])
+            # timescalewin (choose[1,2,4])
+            # pan rand
+            # gain 0.8
+            # orbit 6
+            # room 0.3
+            # sz 0.3
+            )
+        ]
+        ,
+        stacker [
+          ("lead", 
+            slow 8
+            $ splice 2 "<1 2> <3 [2 3]>"
+            -- $ hurry "1.25 0.5"
+            -- $ roll'
+            -- $ twoglit'
+            -- $ shiftF "t f f f" "0.125"
+            -- $ shiftB "f f f t" "0.125"
+            $ off "0.125" (|+ n "<-5 -12>")
+            $ s (choose["draft"]) <| prog s2 "6 4@2 3 5@2 3" |+ note 5
+            # octave (choose[3,4])
+            # pan 0.5
+            # timescale (choose[2.25,2.5,4])
+            # timescalewin (choose[1,1.5,2])
+            # gain 0.9
+            # orbit 5
+            # room 0.3
+            # sz 0.3
+            )
+        ]
+      ]
+    --
+    seg orb key = orbit orb <| ur 16 ("2")  (parts ! key) []
+    --
+    --
+d1 $ stack [seg 0 "lead" , seg 1 "bass", seg 2 "key", seg 3 "pad", seg 4 "arp", seg 5 "drums" ]

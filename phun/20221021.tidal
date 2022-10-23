@@ -1,0 +1,45 @@
+bpm 140
+
+-- fun freestyle 
+
+d1
+    $ every 16 (rev.striate 32)
+    $ struct (binaryN 8 "<323 531> <65645 123>")
+    $ x (range 0.5 0.85 $ slow 0.5 $ tri)
+    # y (range 0.05 0.75 $ fast 2 $ saw)
+    # pS "keep_only_equal_s" "SOPHIE_snares"
+    -- # speed (struct (binaryN 8 "<323 531> <65645 123>") $ range 1.25 1.75 sine)
+    # octave 3
+    # c "r" 
+    # room 0.3
+    # sz 0.3
+    # gain 0.85
+    # orbit 1
+
+d2
+    $ struct (binaryN 8 "<323 531> <65645 123>")
+    $ s "feel:5"
+    # legato 1
+    
+d3
+    $ every 8 (rev . striate 8)
+    $ every 8 (# speed "2")
+    $ speed (struct (binaryN 16 "<33 12>") $ range 1.25 1.75 sine)
+    # s "SOPHIE_wet_kicks:5"
+    # gain 0.9
+
+d4
+    -- $ every 16 (rev.striate 64)
+    -- $ every 16 (hurry "2 0.5 -1")
+    $ every 2 (chunk 4 (almostAlways (# speed (choose [2, 0.5]))))$mute
+    -- $ chunk 4 (spreadf [hurry 2,(|* gain 0)]) $ chop "<2 4>" $ almostNever (ply 4)
+    $ struct (binaryN 32 "<223 343> <37 437>")
+    $ x (range "0.05" "0.4" $ fast "0.5" sine) 
+    # y (range "0.05" "0.25" $ slow "2" cosine) 
+    # pS "keep_only_equal_s" "SOPHIE_textures"
+    # octave 2
+    # c "w" 
+    # room 0.3
+    # sz 0.3
+    # gain 0.8
+    # orbit 7
