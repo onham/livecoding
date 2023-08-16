@@ -14,13 +14,13 @@ d1
 
 once
     -- $ ((# crush "[1,2,3,4,5]") . (# squiz 0.8))
-    -- $ bonk
+    $ bonk
     $ chop "<2 4>" $ almostNever (ply 4)
-    $ s "superwavemechanics"
-    # n (slow 4 "0 2 3") # shape 0.25 # speed (rand + 1)
-    # gain 0.7
-    # timescale 20
-    # timescalewin 1
+    $ s "bits"
+    # n (slow 4 "-1 2 3") # shape 0.25 # speed (rand + 1)
+    # gain 1
+    # timescale 100
+    # timescalewin 2
     -- # pan 0.2 
     # lpf 800 
 

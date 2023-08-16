@@ -1,0 +1,24 @@
+bpm 140
+
+once
+    -- $ bonk
+    $ chop "<2 4>" $ almostNever (ply 4)
+    $ s "bits"
+    # n (slow 4 "-1 2 3") # shape 0.25 # speed (rand + 1)
+    # gain 1
+    # timescale 100
+    # timescalewin 2
+    -- # pan 0.2 
+    # lpf 800 
+
+d1
+    -- $ bonk
+    $ chop "<2 4>" $ almostNever (ply 4)
+    $ s "bass"
+    # n (slow 4 "-1 2 3") # shape 0.25 # speed (rand + 1)
+    # gain 1
+    # timescale 100
+    # timescalewin 2
+    -- # pan 0.2 
+    # lpf 800 
+    # connectionN 1

@@ -4,11 +4,11 @@ bpm 140
 
 d1
     $ every 16 (rev.striate 32)
-    $ struct (binaryN 8 "<323 531> <65645 123>")
-    $ x (range 0.5 0.85 $ slow 0.5 $ tri)
+    $ struct (binaryN 8 "<12423> <61245 12353>")
+    $ x (range 0.15 0.55 $ slow 0.5 $ tri)
     # y (range 0.05 0.75 $ fast 2 $ saw)
-    # pS "keep_only_equal_s" "SOPHIE_snares"
-    -- # speed (struct (binaryN 8 "<323 531> <65645 123>") $ range 1.25 1.75 sine)
+    # pS "keep_only_equal_s" "SOPHIE_percussion"
+    -- # speed (struct (binaryN 8 "<15634 531> <61245 123>") $ range 1.25 1.75 sine)
     # octave 3
     # c "r" 
     # room 0.3
@@ -17,7 +17,7 @@ d1
     # orbit 1
 
 d2
-    $ struct (binaryN 8 "<323 531> <65645 123>")
+    $ struct (binaryN 8 "<12423> <61245 12353>")
     $ s "feel:5"
     # legato 1
     
@@ -31,15 +31,159 @@ d3
 d4
     -- $ every 16 (rev.striate 64)
     -- $ every 16 (hurry "2 0.5 -1")
-    $ every 2 (chunk 4 (almostAlways (# speed (choose [2, 0.5]))))$mute
+    -- $ every 2 (chunk 4 (almostAlways (# speed (choose [2, 0.5]))))
     -- $ chunk 4 (spreadf [hurry 2,(|* gain 0)]) $ chop "<2 4>" $ almostNever (ply 4)
-    $ struct (binaryN 32 "<223 343> <37 437>")
-    $ x (range "0.05" "0.4" $ fast "0.5" sine) 
+    $ struct (binaryN 8 "<223 343> <37 437>")
+    $ x (range "0.05" "0.8" $ fast "0.5" sine) 
     # y (range "0.05" "0.25" $ slow "2" cosine) 
-    # pS "keep_only_equal_s" "SOPHIE_textures"
-    # octave 2
+    # pS "keep_only_equal_s" "breaks"
+    # octave 4
     # c "w" 
     # room 0.3
     # sz 0.3
     # gain 0.8
     # orbit 7
+
+s1 = sheet {
+  numerals = every 2 (rev) "<3 2 4 5>",
+  mode = "minor"
+}
+
+s3 = s1 {
+  mode = "minor", 
+--   key = "<c g d a>",
+--   numerals = "<1 6 3 5>", 
+  numerals = "<1 3 5 7>",
+  sndDom = "<f t f f>"
+}
+
+-- creepy textures fx freestyle
+
+d5
+    -- $ every 16 (rev.striate 32)
+    -- $ every 8 (hurry "2 -1")
+    -- $ chunk 4 (spreadf [hurry 2,(|* gain 0)]) $ chop "<2 4>" $ almostNever (ply 4)
+    $ off "0.125" (|+ note "<-7>")
+    -- $ off "0.125" (|+ n "<-7>")
+    $ struct (binaryN 8 "<33 531> <6565 123> 12")
+    $ x (range 0.5 0.85 $ slow 0.5 $ tri) 
+        <| prog s1 "-4@4 -12 -14@2" 
+        |- note 
+        "<5 7>"
+        -- (choose[5,7])
+    # y (range 0.05 0.75 $ fast 2 $ saw)
+    # pS "keep_only_equal_s" "arca_textures"
+    -- # speed (struct (binaryN 16 "<323 531> <65645 123>") $ range 1.25 1.75 sine)
+    # octave 3
+    # c "r" 
+    # room 0.3
+    # sz 0.3
+    # gain 0.8
+    # orbit 1
+
+
+do
+let
+    part = "1" -- <- this can be changed with midi/osc
+    parts = transformStacker [
+        -- SOPHIE textures meld
+        stacker [
+          ("lead", 
+            struct (binaryN 8 "<33 531> <6565 123> 12") 
+            $ fast 0.5
+            -- $ splice 2 "<1 2> <3 [2 3]>"
+            $ hurry "-0.5"
+            $ every 16 (rev.striate 32)
+            $ every 8 (hurry "2 -1")
+            -- $ chunk 4 (spreadf [hurry 2,(|* gain 0)]) $ chop "<2 4>" $ almostNever (ply 4)
+            $ off "0.125" (|+ note "<-7>")
+            $ off "0.125" (|+ n "<-7>")
+            $ x (range 0.5 0.85 $ slow 0.5 $ tri) 
+                <| prog s3 "-24@4 -12 -14@2" 
+                |- note 
+                -- "<5 7>"
+                (choose[5,7])
+            # y (range 0.05 0.75 $ fast 2 $ saw)
+            # pS "keep_only_equal_s" "SOPHIE_textures"
+            # speed (struct (binaryN 16 "<323 531> <65645 123>") $ range 1.25 1.75 sine)
+            # octave 3
+            # c "r" 
+            # room 0.3
+            # sz 0.3
+            # gain 1
+            # orbit 5
+            )
+        ]
+        ,
+        -- arca doot doot
+        stacker [
+          ("lead", 
+            struct (binaryN 8 "<33 531> <6565 123> 12")
+            -- $ every 16 (rev.striate 32)
+            -- every 8 (hurry "2 -1")
+            $ off "0.125" (|+ note "<-7>")
+            -- $ off "0.125" (|+ n "<-7>")
+            -- $ chunk 128 (spreadf [hurry "-0.5",(|* gain 0)]) $ chop "<1 2>" $ almostNever (ply 2)
+            $ x (range 0.5 0.85 $ slow 0.5 $ tri) 
+                <| prog s1 "-4@4 -12 -14@2" 
+                |- note 
+                -- "<5 7>"
+                (choose[5,7])
+            # y (range 0.05 0.75 $ fast 2 $ saw)
+            # pS "keep_only_equal_s" "arca_textures"
+            # speed (struct (binaryN 16 "<323 531> <65645 123>") $ range 1.25 1.75 sine)
+            # octave 3
+            # c "r" 
+            # room 0.3
+            # sz 0.3
+            # gain 0.8
+            # orbit 1
+            )
+        ]
+        ,
+        -- fx meld
+        stacker [
+          ("lead", 
+            struct (binaryN 8 "<333 531> <123> 66") 
+            $ fast 0.5
+            -- $ splice 2 "<1 2> <3 [2 3]>"
+            $ hurry "-0.5"
+            $ every 1 (rev.striate 128)
+            $ every 8 (hurry "2 -1")
+            -- $ chunk 4 (spreadf [hurry 2,(|* gain 0)]) $ chop "<2 4>" $ almostNever (ply 4)
+            -- $ off "0.125" (|+ note "<-7>")
+            $ off "0.125" (|+ n "<-7>")
+            $ x (range 0.25 0.85 $ slow 0.5 $ tri) 
+                <| prog s1 "-7@4 -5 -7@2" 
+                |- note 
+                -- "<5 7>"
+                (choose[5,7])
+            # y (range 0.05 0.25 $ fast 2 $ saw)
+            # pS "keep_only_equal_s" "SOPHIE_fx"
+            -- # speed (struct (binaryN 16 "<323 531> <65645 123>") $ range 1.25 1.75 sine)
+            # octave 5
+            # c "r" 
+            # room 0.3
+            # sz 0.3
+            # gain 1
+            # orbit 6
+            )
+        ]
+        ,
+        stacker [
+          ("lead",
+            n "0"
+            # s "brainsamples"
+            # begin (choose[0.1,0.4,0.3])
+            # end (choose[0.5,0.7,0.9])
+            # room 0.3
+            # sz 0.3
+            # orbit 9
+            )
+        ]        
+      ]
+    --
+    seg orb key = orbit orb <| ur 16 ("3")  (parts ! key) []
+    --
+    --
+d1 $ stack [seg 0 "lead" , seg 1 "bass", seg 2 "key", seg 3 "pad", seg 4 "arp", seg 5 "drums" ]

@@ -1,0 +1,62 @@
+d1 
+    $ bounceWith 8 0.5 0.66 (|* gain 0.95) 
+    $ s "rm"
+    # cut 1 
+    # slow 4 
+    $ stack [s "bd" #cut 1, press $ s "cp" #cut 2]
+
+bpm 140
+
+d2
+    $ stack $ take 10 
+    $ zipWith (~>) 
+        (map pure $ map (^2) [0, 0.1 .. ])
+        $ iterate ( |* speed 0.9) 
+        $ s "dr:10" # end 0.15
+        
+d3 
+    $ stack
+        [
+            every "5 8" (off "<0.125>" (|+ n "<7 12 -5>"))
+            $ slow 2
+            $ sometimesBy 0.5 (fast "-1 -2 0.5 0.25 0.05 0.75 0.125 -3") 
+            $ n (arp "<disconverge thumbupdown diverge>" "{a4'min7'8 c5'mS6'8}/16") 
+            -- $ x (range "0.25" "0.375" $ fast "1.75" cosine) 
+            -- <| prog s1 "5@3 4@2 2 3" |+ note 7
+            # y (range "0.25" "0.4" $ slow "1.5" cosine) 
+            -- <| prog s2 "8 3@2 5@2 1" |- note 5
+            # pS "keep_only_equal_s" "foley"
+            # octave 4
+            # lpf 2000
+            # timescale 4
+            # timescalewin 2
+            # room 0.3
+            # sz 0.3
+            # offset (choose[0.1,0.22,0.5,1,0.155])
+            # gain 0.85
+            # orbit 3
+            ,
+            every "3 5 8" (off "<0.125>" (|+ n "<7 12 -5>"))
+            $ slow 2
+            $ sometimesBy 0.5 (fast "-1 -2 0.5 0.25 0.05 0.75 0.125 -3") 
+            $ n (arp "<thumbupdown diverge pinkydown>" "{a4'min6'8 c5'mS6'8}/16") 
+            # s "quan2"
+            # octave 2
+            # lpf 300
+            # timescale 16
+            # timescalewin 2
+            -- # begin 0.2
+            -- # end 0.5
+            # room 0.3
+            # sz 0.3
+            # offset (choose[0.1,0.22,0.5,1,0.155])
+            # gain 1
+            # orbit 2
+        ]
+
+d1
+    $ struct "t*16"
+    $ x (range "0.6" "0.7" $ fast "1" sine)
+    # y (range "0.2" "0.3" $ fast "1" cosine)
+    # c "w" -- color
+    # room 0.5

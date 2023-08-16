@@ -70,16 +70,15 @@ d2
         <| prog s1 "5@3 4@2 2 3" |+ note 7
         # y (range "0.25" "0.4" $ slow "1.85" perlin) 
         <| prog s3 "8 3@2 5@2 1" |- note 5
-        # pS "keep_only_equal_s" "glitch"
+        # pS "keep_only_equal_s" "SOPHIE_snares"
         )
     [     
-        roll'
-        -- ghost,
-        -- rollspeed,
+        -- roll',
+        -- rollspeed
         -- splice 4 "0 .. 2",
         -- splice 2 "<1 2> <3 [2 3]>",
-        -- hurry "1.25 0.5",
-        -- (# timescale "2 2.25 2.5")
+        hurry "1.25 0.5",
+        (# timescale "2 2.25 2.5")
     ]
     -- # nudge (fast 8 "0 0.01")
     # gain 0.85
